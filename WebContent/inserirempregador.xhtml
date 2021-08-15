@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+  <title>Inserir Empregador</title>
+</h:head>
+
+<h:body>
+	  <table style="width:25%;" border="1">
+	  <tr>
+	    <th>Cargos disponiveis</th>
+	  </tr>
+	  <tr>
+	    <td><b>Codigo</b></td>
+	    <td><b>Cargo</b></td>
+	  </tr>
+	  <tr>
+	    <td>1</td>
+	    <td>Desenvolvedor JAVA</td>
+	  </tr>
+	  <tr>
+	    <td>2</td>
+	    <td>Administrador</td>
+	  </tr>
+	  <tr>
+	    <td>3</td>
+	    <td>Analista</td>
+	  </tr>
+	</table>
+   <h:form id="formempregador">
+     
+	  <div class="ui-fluid p-formgrid p-grid">
+	        <div class="p-field p-col">
+		        <h:outputLabel value="Id"/>
+		        <p:inputText  value="#{empregadorBean.empregador.codEmpregador}" />
+	         </div>
+		     <div class="p-field p-col">
+		        <h:outputLabel value="Nome"/>
+		        <p:inputText  value="#{empregadorBean.empregador.nome}" />
+		     </div>
+             <div class="p-field p-col">
+		        <h:outputLabel value="Sobrenome"/>
+		        <p:inputText  value="#{empregadorBean.empregador.sobrenome}" />
+		     </div>
+		     
+		     <div class="p-field p-col">
+		        <h:outputLabel value="CodCargo"/>
+		        <p:inputText  value="#{empregadorBean.empregador.cargo.codCargo}" />
+		     </div>
+		     <div class="p-field p-col">
+		        <h:outputLabel value="Data Admissão"/>
+		        <p:inputText  value="#{empregadorBean.empregador.data}" />
+		     </div>
+		     <div class="p-field p-col">
+		        <h:outputLabel value="Salario"/>
+		        <p:inputText  value="#{empregadorBean.empregador.salario}" />
+		    </div>
+		    
+		       <h5 class="p-mt-0">Sexo</h5>
+		        <p:selectOneRadio id="console" value="#{empregadorBean.empregador.sexo}" unselectable="true">
+		            <f:selectItem itemLabel="Masculino" itemValue="Masculino"/>
+		            <f:selectItem itemLabel="Feminino" itemValue="Feminino"/>
+		        </p:selectOneRadio>
+	
+		        <h5 class="p-mt-0">Situação</h5>
+                <p:selectBooleanCheckbox value="#{empregadorBean.empregador.situacao}" itemLabel="Ativo" unselectable="true"/>
+		   
+			 <div class="p-field p-col">
+			        <h:outputLabel value="Observacao"/>
+			          <p:inputTextarea rows="6" cols="33" value="#{empregadorBean.empregador.observacao}"/>
+			    
+			  </div>
+	
+		  </div>
+		  <p:commandButton value="Novo" action="#{empregadorBean.novo}"  />
+	 
+          <p:commandButton value="Salvar" action="#{empregadorBean.salvar}" update=":formempregador"  />
+          <p:commandButton value="Remover" action="#{empregadorBean.remove}"  update=":formempregador" />
+   
+          <center>
+     
+          <h:dataTable value= "#{empregadorBean.empregadores}" var="empregador" border="1" width="25%">
+            
+            <h:column>
+              <h:outputText value= "#{empregador.codEmpregador}"/>
+            </h:column>
+           <h:column>
+              <h:outputText value= "#{empregador.nome}"/>
+            </h:column>
+            <h:column>
+               <p:commandButton value="Remover" action="#{empregadorBean.remove(empregador)}" update=":formempregador" />
+            </h:column>
+          </h:dataTable>
+          </center>
+    </h:form>
+
+</h:body>
+
+</html>
